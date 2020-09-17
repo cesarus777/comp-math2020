@@ -200,13 +200,21 @@ public:
 
     data_file << data;
     plot << "filename='" << data_file.name().c_str() << "'\n";
-    plot << "ofilename='" << data_name << "'\n";
+    plot << "ofilename='" << data_name;
+
+    if(linear == false)
+    {
+      plot << "_nonlinear'\n";
+      plot << "set nonlinear y via log10(y) inverse 10**y\n";
+    }
+    else
+    {
+      plot << "'\n";
+    }
+
     plot << "xrange_lim=" << config::STEP_LIMIT << "\n";
     plot << "xsize=" << graph_width << "\n";
     plot << "ysize=" << graph_height << "\n";
-
-    if(linear == false)
-      plot << "set nonlinear y via log10(y) inverse 10**y\n";
 
     plot << "load 'plot_to_" << output() << ".gnu'" << "\n";
 
