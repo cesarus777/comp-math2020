@@ -221,15 +221,15 @@ public:
     // waiting gnuplot for reading from tmpfile
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
+    if(dump_data)
+      std::ofstream{std::string{data_name} + ".txt"} << data;
+
     if(logging)
     {
       std::cout << "press any key to continue..." << std::endl;
       std::cin.clear();
       std::cin.ignore(1);
     }
-
-    if(dump_data)
-      std::ofstream{std::string{data_name} + ".txt"} << data;
   }
 
   void plot_all(std::string_view data_name_template = "function_") const
