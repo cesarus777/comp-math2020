@@ -6,7 +6,9 @@
 #include "tmp_fstream.hpp"
 
 #include <array>
+#include <chrono>
 #include <stdexcept>
+#include <thread>
 #include <tuple>
 
 
@@ -207,6 +209,9 @@ public:
       plot << "set nonlinear y via log10(y) inverse 10**y\n";
 
     plot << "load 'plot_to_" << output() << ".gnu'" << "\n";
+
+    // waiting gnuplot for reading from tmpfile
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     if(logging)
     {
