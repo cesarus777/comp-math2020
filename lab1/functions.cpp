@@ -43,22 +43,22 @@ double basic_function::num_derivative::compute3(double x, double h) const
 // formula(4)
 double basic_function::num_derivative::compute4(double x, double h) const
 {
-  return (foo(x + h) - foo(x - h)) / (2 * h);
+  return (foo(x + h) - foo(x - h)) / (2.0 * h);
 }
 
 // formula(5)
 double basic_function::num_derivative::compute5(double x, double h) const
 {
-  return (4 / 3) * (foo(x + h) - foo(x - h)) / (2 * h) -
-      (1 / 3) * (foo(x + 2 * h) - foo(x - 2 * h)) / (4 * h);
+  return (4.0 / 3.0) * (foo(x + h) - foo(x - h)) / (2.0 * h) -
+      (1.0 / 3.0) * (foo(x + 2.0 * h) - foo(x - 2.0 * h)) / (4.0 * h);
 }
 
 // formula(6)
 double basic_function::num_derivative::compute6(double x, double h) const
 {
-  return (3 / 2) * (foo(x + h) - foo(x - h)) / (2 * h) -
-       (3 / 5) * (foo(x + 2 * h) - foo(x - 2 * h)) / (4 * h) + 
-       (1 / 10) * (foo(x + 3 * h) - foo(x - 3 * h)) / (6 * h);
+  return (3.0 / 2) * (foo(x + h) - foo(x - h)) / (2.0 * h) -
+      (3.0 / 5.0) * (foo(x + 2.0 * h) - foo(x - 2.0 * h)) / (4.0 * h) +
+      (1.0 / 10.0) * (foo(x + 3.0 * h) - foo(x - 3.0 * h)) / (6.0 * h);
 }
 
 std::array<double, 5> basic_function::num_derivative::compute(double x,
