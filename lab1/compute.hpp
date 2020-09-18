@@ -68,8 +68,10 @@ private:
   double x0;
   std::tuple<Funcs...> functions;
   output_type_t output_type = WINDOW;
+  fs::path output_dir = "./";
   size_t graph_width = 1600;
   size_t graph_height = 900;
+  bool be_quiet = false;
   bool dump_data = false;
   bool logging = false;
   bool linear = true;
@@ -78,7 +80,7 @@ public:
   explicit context(double x, const std::vector<std::string>& args)
       : x0{x}, functions{ Funcs{}... }
   {
-    for(auto arg = args.cbegin(); arg != args.cend(); arg++)
+    for(auto arg = args.cbegin(); ++arg != args.cend();)
     {
       if(*arg == "-o")
       {
@@ -105,10 +107,6 @@ public:
         if(ss.fail())
           throw std::runtime_error{"Bad plot size!"};
       }
-      else if(*arg == "--dump-data")
-      {
-        dump_data = true;
-      }
       else if(*arg == "-v" || *arg == "--verbose")
       {
         logging = true;
@@ -117,9 +115,41 @@ public:
       {
         linear = false;
       }
+      else if(*arg == "--dump-data")
+      {
+        dump_data = true;
+      }
+      else if(*arg == "-q")
+      {
+        be_quiet = true;
+      }
+      else if(*arg == "-od")
+      {
+        if(++arg == args.cend() || *arg == "")
+        {
+          std::cerr << "error: " <<  "Output directory can't be empty."
+                    << " Outputting in default directory: " << output_dir
+                    << std::endl;
+          continue;
+        }
+
+        fs::path odir{*arg};
+
+        if(fs::is_directory(odir) == false)
+        {
+          std::cerr << "error: " <<  odir << " is not a directory."
+                    << " Outputting in default directory: " << output_dir
+                    << std::endl;
+        }
+        else
+        {
+          output_dir = std::move(odir);
+        }
+      }
       else
       {
-        throw std::runtime_error{"Unknown command line argument: " + *arg};
+        std::cerr << "error: " << "Unknown command line argument: " << *arg
+                  << std::endl;
       }
     }
   }
@@ -189,40 +219,40 @@ public:
 
 
   void plot(const plot_data<double, 5, config::STEP_LIMIT>& data,
-            std::string_view data_name) const
+            std::string_view data_name_in) const
   {
     support::gnuplot plot{logging};
-
     support::tmp_ofstream data_file;
+    std::ostringstream data_name;
+    data_name << output_dir.c_str() << data_name_in;
+
+    if(linear == false)
+    {
+      data_name << "_nonlinear";
+      plot << "set nonlinear y via log10(y) inverse 10**y\n";
+    }
 
     if(logging)
       std::clog << "tmpfile name : " << data_file.name() << std::endl;
 
     data_file << data;
     plot << "filename='" << data_file.name().c_str() << "'\n";
-    plot << "ofilename='" << data_name;
-
-    if(linear == false)
-    {
-      plot << "_nonlinear'\n";
-      plot << "set nonlinear y via log10(y) inverse 10**y\n";
-    }
-    else
-    {
-      plot << "'\n";
-    }
+    plot << "ofilename='" << data_name.str() << "'\n";
 
     plot << "xrange_lim=" << config::STEP_LIMIT << "\n";
     plot << "xsize=" << graph_width << "\n";
     plot << "ysize=" << graph_height << "\n";
 
-    plot << "load 'plot_to_" << output() << ".gnu'" << "\n";
+    if((output_type != WINDOW) || (be_quiet == false))
+    {
+      plot << "load 'plot_to_" << output() << ".gnu'" << "\n";
 
-    // waiting gnuplot for reading from tmpfile
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+      // waiting gnuplot for reading from tmpfile
+      std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 
     if(dump_data)
-      std::ofstream{std::string{data_name} + ".txt"} << data;
+      std::ofstream{data_name.str() + ".txt"} << data;
 
     if(logging)
     {
