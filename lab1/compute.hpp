@@ -68,7 +68,7 @@ private:
   double x0;
   std::tuple<Funcs...> functions;
   output_type_t output_type = WINDOW;
-  fs::path output_dir = "./";
+  fs::path output_dir = "./output/";
   size_t graph_width = 1600;
   size_t graph_height = 900;
   bool be_quiet = false;
