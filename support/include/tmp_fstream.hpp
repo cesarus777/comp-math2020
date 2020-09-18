@@ -50,6 +50,10 @@ public:
     ifs >> elem;
     if(ifs.fail())
       throw std::runtime_error{"tmp_ifstream fail!"};
+
+    ifs.flush();
+
+    return *this;
   }
 
   ~tmp_ifstream()
@@ -150,6 +154,22 @@ public:
     iofs << elem;
     if(iofs.fail())
       throw std::runtime_error{"tmp_fstream fail!"};
+
+    iofs.flush();
+
+    return *this;
+  }
+
+  template<typename T>
+  tmp_fstream& operator>>(T& elem)
+  {
+    iofs >> elem;
+    if(iofs.fail())
+      throw std::runtime_error{"tmp_fstream fail!"};
+
+    iofs.flush();
+
+    return *this;
   }
 
   ~tmp_fstream()
