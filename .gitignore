@@ -1,0 +1,11 @@
+#build directory
+build
+build/*
+
+#install directory
+install
+install/*
+
+# swap files
+*.swp
+
