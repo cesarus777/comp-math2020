@@ -51,8 +51,6 @@ public:
     if(ifs.fail())
       throw std::runtime_error{"tmp_ifstream fail!"};
 
-    ifs.flush();
-
     return *this;
   }
 
