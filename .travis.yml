@@ -1,0 +1,32 @@
+language: c++
+sudo: false
+dist: bionic
+
+branches:
+  except: /pr\/.*/
+
+compiler:
+  - gcc
+  - clang
+
+os:
+  - linux
+  - osx
+
+arch:
+  - amd64
+  - arm64
+
+addons:
+  apt:
+    - gnuplot
+
+script:
+  - . install_support.sh
+  - ./install/lab1/lab1 --dump-data -od test -o window
+  - ./install/lab1/lab1 -od test -o jpg
+  - ./install/lab1/lab1 -od test -o png
+  - |
+    for file in ./install/lab1/output/*; do
+      diff "$filename" "test/$(basename $filename)"
+    done
