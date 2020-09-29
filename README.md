@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/cesarus777/comp-math2020/badge)](https://www.codefactor.io/repository/github/cesarus777/comp-math2020)
+
 # **comp-math2020**
 Solving problems and laboratory practice from Computational Mathematics course
 
