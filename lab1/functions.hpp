@@ -26,7 +26,6 @@ public:
   virtual function analytical_derivative() const = 0;
 
   class num_derivative;
-
 }; // class basic_function
 
 
@@ -50,7 +49,6 @@ public:
   double compute6(double x, double h) const; // formula (6)
 
   std::array<double, 5> compute(double x, double h) const;
-
 }; // class numerical_derivative
 
 
@@ -63,7 +61,6 @@ public:
   double operator()(double x) const;
 
   virtual function analytical_derivative() const;
-
 }; // class function_sin_x_x
 
 
@@ -76,7 +73,6 @@ public:
   double operator()(double x) const;
 
   virtual function analytical_derivative() const;
-
 }; // class function_cos_sin_x
 
 
@@ -89,7 +85,6 @@ public:
   double operator()(double x) const;
 
   virtual function analytical_derivative() const;
-
 }; // class function_exp_sin_cos_x
 
 
@@ -102,7 +97,6 @@ public:
   double operator()(double x) const;
 
   virtual function analytical_derivative() const;
-
 }; // class function_ln_x_plus_3
 
 
@@ -115,7 +109,6 @@ public:
   double operator()(double x) const;
 
   virtual function analytical_derivative() const;
-
 }; // class function_sqrt_x_plus_3
 
 }; // namespace comp

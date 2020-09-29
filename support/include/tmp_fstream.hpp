@@ -61,7 +61,6 @@ public:
   }
 
   inline const fs::path& name() const { return filename; }
-
 }; // class tmp_ifstream
 
 
@@ -113,7 +112,6 @@ public:
   }
 
   inline const fs::path& name() const { return filename; }
-
 }; // class tmp_ofstream
 
 
@@ -177,7 +175,6 @@ public:
   }
 
   inline const fs::path& name() const { return filename; }
-
 }; // class tmp_fstream
 
 }; // namespace comp::support

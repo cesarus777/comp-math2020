@@ -43,7 +43,6 @@ public:
 
     return *this;
   }
-
 }; // class gnuplot
 
 }; // namespace support

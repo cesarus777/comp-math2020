@@ -285,7 +285,6 @@ public:
       plot(data_set, data_name);
     }
   }
-
 }; // class context
 
 }; // namespace comp
