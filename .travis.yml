@@ -19,10 +19,10 @@ arch:
 
 addons:
   apt:
-    - gnuplot
     update: true
     packages:
-    - cmake
+      - cmake
+      - gnuplot
 
 script:
   - . install_support.sh
