@@ -20,13 +20,14 @@ arch:
 addons:
   apt:
     - gnuplot
+    update: true
+    packages:
+    - cmake
 
 script:
   - . install_support.sh
-  - ./install/lab1/lab1 --dump-data -od test -o window
-  - ./install/lab1/lab1 -od test -o jpg
-  - ./install/lab1/lab1 -od test -o png
+  - ./install/lab1/lab1 --dump-data -od test
   - |
-    for file in ./install/lab1/output/*; do
+    for file in ./install/lab1/output/*.txt; do
       diff "$filename" "test/$(basename $filename)"
     done
