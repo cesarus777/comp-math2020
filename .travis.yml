@@ -47,5 +47,11 @@ script:
     for file in ./output/*.txt; do
       testfile="./test/$(basename $file)"
       echo "comparasing $file & $testfile"
-      diff "$file" "$testfile"
+      if [ -nz $(diff "$file" "$testfile") ]
+      then
+        echo "$file:"
+        cat $file
+        echo "$testfile:"
+        cat $testfile
+      fi
     done
