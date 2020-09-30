@@ -1,13 +1,13 @@
 language: c++
-sudo: false
+sudo: required
 dist: bionic
 
 branches:
   except: /pr\/.*/
 
 compiler:
-  - gcc-8
-  - clang-10
+  - gcc
+  - clang
 
 os:
   - linux
@@ -21,11 +21,17 @@ addons:
     update: true
     packages:
       - clang-10
+      - clang++-10
       - cmake
       - gnuplot
       - gcc-8
+      - gcc++-8
 
 before_script:
+  - ln -s /usr/bin/gcc-8 /usr/local/bin/gcc
+  - ln -s /usr/bin/g++-8 /usr/local/bin/g++
+  - ln -s /usr/bin/clang-10 /usr/local/bin/clang
+  - ln -s /usr/bin/clang++-10 /usr/local/bin/clang++
   - cd $TRAVIS_BUILD_DIR && mkdir build
   - cd $TRAVIS_BUILD_DIR/build && cmake ..
 
