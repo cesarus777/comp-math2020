@@ -39,6 +39,7 @@ script:
   - mkdir test
   - ./install/lab1/lab1 --dump-data -od test
   - ./install/lab1/lab1 --dump-data --nonlinear -od test
+  - ls test
   - |
     for file in ./install/lab1/output/*.txt; do
       diff "$file" "test/$(basename $file)"
