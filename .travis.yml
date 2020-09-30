@@ -37,8 +37,9 @@ script:
 
 after_success:
   - cd $TRAVIS_BUILD_DIR/build
+  - mkdir test
   - ./install/lab1/lab1 --dump-data -od test
   - |
     for file in ./install/lab1/output/*.txt; do
-      diff "$filename" "test/$(basename $filename)"
+      diff "$file" "test/$(basename $file)"
     done
