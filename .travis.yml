@@ -6,8 +6,8 @@ branches:
   except: /pr\/.*/
 
 compiler:
-  - gcc
-  - clang
+  - gcc-8
+  - clang-10
 
 os:
   - linux
@@ -15,7 +15,6 @@ os:
 
 arch:
   - amd64
-  - arm64
 
 addons:
   apt:
