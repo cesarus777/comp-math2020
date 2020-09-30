@@ -21,12 +21,12 @@ addons:
 install:
   - sudo apt update
   - sudo apt -y install gnuplot cmake g++-8 libstdc++-8-dev clang-10
+  - sudo ln -s /usr/bin/gcc-8 /usr/local/bin/gcc
+  - sudo ln -s /usr/bin/g++-8 /usr/local/bin/g++
+  - sudo ln -s /usr/bin/clang-10 /usr/local/bin/clang
+  - sudo ln -s /usr/bin/clang++-10 /usr/local/bin/clang++
 
 before_script:
-  - ln -s /usr/bin/gcc-8 /usr/local/bin/gcc
-  - ln -s /usr/bin/g++-8 /usr/local/bin/g++
-  - ln -s /usr/bin/clang-10 /usr/local/bin/clang
-  - ln -s /usr/bin/clang++-10 /usr/local/bin/clang++
   - cd $TRAVIS_BUILD_DIR && mkdir build
   - cd $TRAVIS_BUILD_DIR/build && cmake ..
 
