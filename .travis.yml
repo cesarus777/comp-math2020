@@ -1,5 +1,4 @@
-language: c++
-sudo: required
+language: cpp
 dist: bionic
 
 branches:
@@ -11,7 +10,6 @@ compiler:
 
 os:
   - linux
-  - osx
 
 arch:
   - amd64
@@ -19,13 +17,10 @@ arch:
 addons:
   apt:
     update: true
-    packages:
-      - clang-10
-      - clang++-10
-      - cmake
-      - gnuplot
-      - gcc-8
-      - gcc++-8
+
+install:
+  - sudo apt update
+  - sudo apt -y install gnuplot cmake g++-8 libstdc++-8-dev clang-10
 
 before_script:
   - ln -s /usr/bin/gcc-8 /usr/local/bin/gcc
