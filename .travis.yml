@@ -1,3 +1,6 @@
+notifications:
+  email: false
+
 language: cpp
 dist: bionic
 
@@ -35,12 +38,12 @@ script:
   - cmake --build .
   - DESTDIR=./install cmake -DCMAKE_INSTALL_PREFIX=/ -P ./cmake_install.cmake
   - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$(pwd)/install/support/
-  - cd $TRAVIS_BUILD_DIR/build
+  - cd $TRAVIS_BUILD_DIR/build/install/lab1
   - mkdir test
   - ./install/lab1/lab1 --dump-data -od test
   - ./install/lab1/lab1 --dump-data --nonlinear -od test
   - ls test
   - |
-    for file in ./install/lab1/output/*.txt; do
-      diff "$file" "test/$(basename $file)"
+    for file in ./output/*.txt; do
+      diff "$file" "./test/$(basename $file)"
     done
