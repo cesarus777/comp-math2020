@@ -143,7 +143,7 @@ public:
         }
         else
         {
-          output_dir = std::move(odir);
+          output_dir = std::move(odir / "");
         }
       }
       else
