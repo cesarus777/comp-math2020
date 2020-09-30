@@ -24,14 +24,16 @@ addons:
       - cmake
       - gnuplot
 
+before_script:
+  - cd $TRAVIS_BUILD_DIR && mkdir build
+  - cd $TRAVIS_BUILD_DIR/build && cmake ..
 script:
-  - (mkdir build && cd build)
-  - cmake ..
+  - cd $TRAVIS_BUILD_DIR/build
   - cmake --build .
   - DESTDIR=./install cmake -DCMAKE_INSTALL_PREFIX=/ -P ./cmake_install.cmake
 
 after_success:
-  - cd ..
+  - cd $TRAVIS_BUILD_DIR/build
   - ./install/lab1/lab1 --dump-data -od test
   - |
     for file in ./install/lab1/output/*.txt; do
