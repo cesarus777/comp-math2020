@@ -20,10 +20,10 @@ addons:
   apt:
     update: true
     packages:
-      - clang
+      - clang-10
       - cmake
       - gnuplot
-      - gcc
+      - gcc-8
 
 before_script:
   - cd $TRAVIS_BUILD_DIR && mkdir build
