@@ -25,10 +25,13 @@ addons:
       - gnuplot
 
 script:
-  - mkdir build
-  - cmake -S . -B ./build
-  - cmake --build ./build
-  - DESTDIR=./install cmake -DCMAKE_INSTALL_PREFIX=/ -P ./build/cmake_install.cmake
+  - (mkdir build && cd build)
+  - cmake ..
+  - cmake --build .
+  - DESTDIR=./install cmake -DCMAKE_INSTALL_PREFIX=/ -P ./cmake_install.cmake
+
+after_success:
+  - cd ..
   - ./install/lab1/lab1 --dump-data -od test
   - |
     for file in ./install/lab1/output/*.txt; do
