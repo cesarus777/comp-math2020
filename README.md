@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/cesarus777/comp-math2020.svg?branch=master)](https://travis-ci.org/cesarus777/comp-math2020)
-
 [![CodeFactor](https://www.codefactor.io/repository/github/cesarus777/comp-math2020/badge)](https://www.codefactor.io/repository/github/cesarus777/comp-math2020)
 
 # **comp-math2020**
