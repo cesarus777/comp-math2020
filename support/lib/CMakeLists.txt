@@ -5,5 +5,6 @@ add_library(compute_support SHARED
 install(TARGETS compute_support
         LIBRARY
         DESTINATION support
+        COMPONENT lab1
 )
 
