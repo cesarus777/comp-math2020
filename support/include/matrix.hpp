@@ -504,7 +504,7 @@ public:
     }
     while(error > std::numeric_limits<T>::epsilon());
 
-    std::cout << "nearest eigenvalue to " << value_entry << " is " << value << std::endl;
+    //std::cout << "nearest eigenvalue to " << value_entry << " is " << value << std::endl;
 
     return value;
 #else
@@ -524,7 +524,7 @@ public:
 
     T eigenvalue = (x1 * (*this * x1)) / (x1 * x1);
 
-    std::cout << "nearest eigenvalue to " << value << " is " << eigenvalue << std::endl;
+    //std::cout << "nearest eigenvalue to " << value << " is " << eigenvalue << std::endl;
 
     return eigenvalue;
 #endif
